@@ -4,7 +4,7 @@ function App() {
   const [message, setMessage] = useState('Loading...');
 
   // This will use the variable we set in Vercel settings
-  const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:3000';
+  const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000';
 
   useEffect(() => {
     // Replace '/api/your-endpoint' with an actual route from your backend
