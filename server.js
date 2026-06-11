@@ -1,6 +1,15 @@
+require('dotenv').config();
+
 const express = require('express');
+const sequelize = require('./config/database');
+
+// const sequelize = require('./config/database');
+
 const cors = require('cors');
 const app = express();
+
+const userRoutes = require('./routes/userRoutes');
+app.use('/api/users', userRoutes);
 
 app.use(cors());
 app.use(express.json());
@@ -17,7 +26,7 @@ app.listen(3000, () => console.log('Server running on port 3000'));
 
 // mportant Setup Requirement: Syncing
 
-const sequelize = require('./config/database');
+
 
 // Sync database and start server
 sequelize.sync().then(() => {

@@ -1,15 +1,21 @@
 const Cart = require('../models/cartModel');
 
-// Get all items in user's cart
 exports.getCart = async (req, res) => {
-  const { userId } = req.params;
-  const cartItems = await Cart.findAll({ where: { userId } });
-  res.json(cartItems);
+  try {
+    const { userId } = req.params;
+    const cartItems = await Cart.findAll({ where: { user_id: userId } });
+    res.json(cartItems);
+  } catch (error) {
+    res.status(500).json({ error: 'Failed to fetch cart' });
+  }
 };
 
-// Add item to cart
 exports.addToCart = async (req, res) => {
-  const { userId, productId, quantity } = req.body;
-  const item = await Cart.create({ userId, productId, quantity });
-  res.status(201).json(item);
+  try {
+    const { userId, productId, quantity } = req.body;
+    const item = await Cart.create({ user_id: userId, product_id: productId, quantity });
+    res.status(201).json(item);
+  } catch (error) {
+    res.status(500).json({ error: 'Failed to add to cart' });
+  }
 };
