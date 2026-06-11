@@ -8,6 +8,12 @@ const sequelize = require('./config/database');
 const cors = require('cors');
 const app = express();
 
+app.use(cors({
+  origin: 'https://vogue-avenue.vercel.app', 
+  credentials: true
+}));
+
+
 const userRoutes = require('./routes/userRoutes');
 app.use('/api/users', userRoutes);
 
